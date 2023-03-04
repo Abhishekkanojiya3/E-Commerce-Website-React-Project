@@ -8,6 +8,7 @@ import NavBar from './components/CartItem/NavBar/Navbar';
 import About from './components/pages/About';
 import { Route, Routes } from 'react-router-dom';
 import { CartProvider } from "./components/store/cart-context";
+import Home from './components/pages/Home';
 
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
             />} <
             Routes >
                 <
-                Route path = "/home" > < /Route> <
+                Route path = "/home"
+            element = { < Home / > } > < /Route> <
                 Route path = "/store"
             element = { < CartItems / > } > < /Route> <
                 Route path = "/about"
