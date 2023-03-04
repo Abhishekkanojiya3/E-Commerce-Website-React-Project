@@ -6,17 +6,19 @@ import classes from './Cart.module.css';
 const Cart = (props) => {
     const ctx = useContext(CartContext)
 
-    const totalAmount = `$${ctx.totalAmount.toFixed(2)}`;
+    const totalAmount = ctx.items.reduce((currNum, item) => {
+        return item.price * item.quantity + currNum;
+    }, 0);
 
-    const minusItem = (title) => {
-        ctx.removeCart(title);
+    const minusItem = (id) => {
+        ctx.removeCart(id);
     };
 
 
     const cartEle = ( <
         ul > {
             ctx.items.map((ele) => ( <
-                li key = { ele.title }
+                li key = { ele.id }
                 className = { classes["cart-items"] } >
                 <
                 div className = { classes.summary } > { ele.title } <
@@ -25,7 +27,7 @@ const Cart = (props) => {
                 /div> <
                 div className = { classes.actions } >
                 <
-                button onClick = { minusItem.bind(null, ele.title) } > Remove < /button> <
+                button onClick = { minusItem.bind(null, ele.id) } > Remove < /button> <
                 /div> <
                 /li>
             ))
@@ -40,7 +42,7 @@ const Cart = (props) => {
         button onClick = { props.onTap } > x < /button> <
         /div> <
         h1 className = 'text-center' > CART < /h1>   { cartEle } <
-        div className = { classes.act } > { totalAmount } < /div> <
+        div className = { classes.act } > $ { totalAmount } < /div> <
         /Modal>
     )
 

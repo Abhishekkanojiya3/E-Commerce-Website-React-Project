@@ -9,20 +9,24 @@ const CartContext = React.createContext({
 export const CartProvider = (props) => {
     const [items, setItems] = useState([]);
     const addToCart = (item) => {
-        console.log(item)
-        const itemIndex = items.findIndex((album) => album.title === item.title);
-        if (itemIndex === -1) {
-            setItems([...items, item]);
+        const exist = items.find((itemp) => itemp.id === item.id);
+        if (exist) {
+            setItems(
+                items.map((itemp) =>
+                    itemp.id === item.id ?
+                    {...exist, quantity: exist.quantity + 1 } :
+                    itemp
+                )
+            );
         } else {
-            const alreadyAddedItem = items[itemIndex]
-            const updateSingleItem = {...alreadyAddedItem, quantity: (alreadyAddedItem.quantity) + (item.quantity) }
-            const updateItems = [...items]
-            updateItems[itemIndex] = updateSingleItem
-            setItems(updateItems)
+            setItems([...items, {...item, quantity: 1 }]);
         }
     };
 
-    const removeFromCart = (id) => {};
+    const removeFromCart = (id) => {
+        const res = items.filter((cutElm) => (cutElm.id !== id)); //.map(filterdItem => (setCartItems(filterdItem)))
+        setItems(res)
+    };
 
     const cartcontextVal = {
         items: items,
