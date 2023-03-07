@@ -8,7 +8,7 @@ const NavBar = (props) => {
 
     let quantity = 0
     headCtx.items.forEach((item) => {
-        quantity = quantity + (item.quantity)
+        quantity = quantity + item.quantity
     });
     return (
         //     <Navbar bg="dark" expand="lg" variant="dark">
@@ -42,6 +42,10 @@ const NavBar = (props) => {
         NavLink to = "/about" >
         About <
         /NavLink> <
+        li >
+        <
+        NavLink to = "/contact" > Contact < /NavLink> <
+        /li> <
         /li> <
         button onClick = { props.onShow }
         className = { classes.button } >

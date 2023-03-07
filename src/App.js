@@ -9,6 +9,7 @@ import About from './components/pages/About';
 import { Route, Routes } from 'react-router-dom';
 import { CartProvider } from "./components/store/cart-context";
 import Home from './components/pages/Home';
+import Contact from './components/pages/Contact';
 
 
 function App() {
@@ -36,7 +37,9 @@ function App() {
                 Route path = "/store"
             element = { < CartItems / > } > < /Route> <
                 Route path = "/about"
-            element = { < About / > } > < /Route>
+            element = { < About / > } > < /Route> <
+                Route path = "/contact"
+            element = { < Contact / > } > < /Route>
 
             <
             /Routes>
