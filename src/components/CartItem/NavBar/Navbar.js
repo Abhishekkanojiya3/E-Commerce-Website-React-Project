@@ -19,7 +19,7 @@ const NavBar = (props) => {
         <
         header className = { classes.header } >
         <
-        nav >
+        section >
         <
         ul >
         <
@@ -54,7 +54,7 @@ const NavBar = (props) => {
         span className = { classes.badge } > { quantity } < /span> <
         /button> <
         /ul> <
-        /nav> <
+        /section> <
         /header>
     );
 };

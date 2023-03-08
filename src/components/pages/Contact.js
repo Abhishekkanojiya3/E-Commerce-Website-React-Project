@@ -2,9 +2,6 @@ import React, { useRef } from "react";
 
 import classes from "./Contact.module.css";
 
-
-
-
 const Contact = () => {
 
     const name = useRef('');
@@ -76,10 +73,7 @@ const Contact = () => {
 
         placeholder = "name"
 
-        required
-
-        /
-        >
+        required / >
 
         <
         /div>
