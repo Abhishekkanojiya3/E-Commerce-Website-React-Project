@@ -14,13 +14,13 @@ import Contact from './components/pages/Contact';
 import Products from './components/pages/Products';
 import Login from './components/pages/Login';
 import AuthContext from './components/store/auth-context';
-import HomePage from './components/pages/Homepage';
 import Footer from './components/CartItem/NavBar/Footer';
 
 
 function App() {
     const [showCart, setShowCart] = useState(false);
-    //const authContext = useContext(AuthContext);
+    const authContext = useContext(AuthContext);
+    const isLoggedIn = authContext.isLoggedIn;
 
     const CartHandler = () => {
         setShowCart(true);
@@ -29,67 +29,65 @@ function App() {
     const cartCloseHandler = () => {
         setShowCart(false)
     }
-    return ( <
-        CartProvider >
-        <
-        AuthContextProvider >
-        <
-        NavBar onShow = { CartHandler }
-        /> <
-        h1 className = "text-center p-5 bg-secondary text-white" > The Generics < /h1> {
-            showCart && < Cart onTap = { cartCloseHandler }
-            />} <
-            Switch >
-                <
-                Route exact path = "/" >
-                <
-                HomePage / >
-                <
-                /Route> <
-                Route path = "/home" >
-                <
-                Home / >
-                <
-                /Route>
-
+    return (
+            // <CartProvider>
+            //   <AuthContextProvider>
             <
-            Route path = "/store"
-            exact >
-                <
-                CartItems / >
-                <
-                /Route> <
-                Route path = "/store/:title" >
-                <
-                Products / >
-                <
-                /Route> <
-                Route path = "/about" >
-                <
-                About / >
-                <
-                /Route> <
-                Route path = "/contact" >
-                <
-                Contact / >
-                <
-                /Route> <
-                Route path = "/Login" >
-                <
-                Login / >
-                <
-                /Route> <
-                Route path = "/Logout" >
-                <
-                Login / >
-                <
-                /Route> <
-                /Switch> <
-                Footer / >
-                <
-                /AuthContextProvider> <
-                /CartProvider>
-        );
-    }
+            React.Fragment >
+            <
+            NavBar onShow = { CartHandler }
+            /> <
+            h1 className = "text-center p-5 bg-secondary text-white" > The Generics < /h1> {
+                showCart && < Cart onTap = { cartCloseHandler }
+                />} <
+                Switch >
 
-    export default App;
+                    {
+                        isLoggedIn && < Route path = "/home" >
+                        <
+                        Home / >
+                        <
+                        /Route>}
+
+                        {
+                            isLoggedIn && < Route path = "/store"
+                            exact >
+                                <
+                                CartItems / >
+                                <
+                                /Route>} {
+                                    isLoggedIn && < Route path = "/store/:title" >
+                                        <
+                                        Products / >
+                                        <
+                                        /Route>} {
+                                            isLoggedIn && < Route path = "/about" >
+                                                <
+                                                About / >
+                                                <
+                                                /Route>} {
+                                                    isLoggedIn && < Route path = "/contact" >
+                                                        <
+                                                        Contact / >
+                                                        <
+                                                        /Route>} {
+                                                            !isLoggedIn && < Route path = "/Login" >
+                                                                <
+                                                                Login / >
+                                                                <
+                                                                /Route>} {
+                                                                    isLoggedIn && < Route path = "/Logout" >
+                                                                        <
+                                                                        Login / >
+                                                                        <
+                                                                        /Route>} <
+                                                                        /Switch> <
+                                                                        Footer / > {
+                                                                            /* </AuthContextProvider>
+                                                                                </CartProvider> */
+                                                                        } <
+                                                                        /React.Fragment>
+                                                                );
+                                                        }
+
+                                                    export default App;
