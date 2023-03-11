@@ -2,9 +2,16 @@ import { useContext } from "react";
 import CartContext from "../../store/cart-context";
 import classes from "./NavBar.module.css";
 import { NavLink } from "react-router-dom";
+import AuthContext from "../../store/auth-context";
 
 const NavBar = (props) => {
     const headCtx = useContext(CartContext)
+    const authctx = useContext(AuthContext);
+    const isLoggedIn = authctx.isLoggedIn;
+
+    const logoutHandlerfn = () => {
+        authctx.logout();
+    };
 
     let quantity = 0
     headCtx.items.forEach((item) => {
@@ -21,38 +28,76 @@ const NavBar = (props) => {
         <
         section >
         <
-        ul >
-        <
-        li >
-        <
-        NavLink activeclassname = { classes.active }
-        to = "/home" >
-        Home <
-        /NavLink> <
-        /li> <
-        li >
-        <
-        NavLink activeclassname = { classes.active }
-        to = "/store" >
-        Store <
-        /NavLink> <
-        /li> <
-        li >
-        <
-        NavLink to = "/about" >
-        About <
-        /NavLink> <
-        li >
-        <
-        NavLink to = "/contact" > Contact < /NavLink> <
-        /li> <
-        /li> <
-        button onClick = { props.onShow }
-        className = { classes.button } >
-        <
-        span > Cart < /span> <
-        span className = { classes.badge } > { quantity } < /span> <
-        /button> <
+        ul > {!isLoggedIn && ( <
+                li >
+                <
+                NavLink activeClassName = { classes.active }
+                to = "/Login" >
+                Login <
+                /NavLink> <
+                /li>
+            )
+        } {
+            isLoggedIn && ( <
+                li >
+                <
+                NavLink activeClassName = { classes.active }
+                to = "/home" >
+                Home <
+                /NavLink> <
+                /li>
+            )
+        } {
+            isLoggedIn && ( <
+                li >
+                <
+                NavLink activeClassName = { classes.active }
+                to = "/store" >
+                Store <
+                /NavLink> <
+                /li>
+            )
+        } {
+            isLoggedIn && ( <
+                li >
+                <
+                NavLink activeClassName = { classes.active }
+                to = "/about" >
+                About <
+                /NavLink> <
+                /li>
+            )
+        } {
+            isLoggedIn && ( <
+                li >
+                <
+                NavLink activeClassName = { classes.active }
+                to = "/contact" >
+                Contact <
+                /NavLink> <
+                /li>
+            )
+        } {
+            isLoggedIn && ( <
+                li >
+                <
+                NavLink activeClassName = { classes.active }
+                onClick = { logoutHandlerfn }
+                to = "/Logout" >
+                Logout <
+                /NavLink> <
+                /li>
+            )
+        } {
+            isLoggedIn && ( <
+                button onClick = { props.onshow }
+                className = { classes.button } >
+                <
+                span > Cart < /span> <
+                span className = { classes.badge } > { quantity } < /span> <
+                /button>
+            )
+        } <
         /ul> <
         /section> <
         /header>
