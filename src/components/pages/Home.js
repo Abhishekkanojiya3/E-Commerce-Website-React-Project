@@ -3,7 +3,7 @@ const Home = () => {
         div className = 'container' >
         <
         h1 className = "text-center" > TOURS < /h1> <
-        table class = "table" >
+        table className = "table" >
         <
         thead > < /thead> <
         tbody >

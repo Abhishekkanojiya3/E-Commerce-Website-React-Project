@@ -46,6 +46,7 @@
     font-size: larger;
     border-radius: 10px;
     background-color: grey;
+    width: 78px;
 }
 
 .contactSubmit:hover {
